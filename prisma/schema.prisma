@@ -9,3 +9,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Expert {
+  id    String  @id @default(uuid())
+  name  String
+  email String  @unique
+  phone String?
+  Queue Queue[]
+
+  @@map("experts")
+}
+
+model Queue {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @db.Date()
+  expert    Expert   @relation(fields: [expertId], references: [id])
+  expertId  String
+
+  @@map("queues")
+}
