@@ -17,4 +17,8 @@ export class ExpertsService {
 	async findAllExperts() {
 		return await this.prisma.expert.findMany()
 	}
+
+	async findExpert(id: string) {
+		return await this.prisma.expert.findFirst({ where: { id } })
+	}
 }
