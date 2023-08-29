@@ -7,7 +7,8 @@ import {
 	HttpStatus,
 	Patch,
 	Param,
-	BadRequestException
+	BadRequestException,
+	Delete
 } from '@nestjs/common'
 import { QueuecustomersService } from './queuecustomers.service'
 import CreateQueueCustomersDto from './dtos/create-queuecustomers'
@@ -53,6 +54,18 @@ export class QueuecustomersController {
 
 		await this.queuecustomersService.attendCustomer(customer.id)
 
+		return res.status(HttpStatus.NO_CONTENT).send()
+	}
+
+	@Delete(':id')
+	async deleteCustomer(@Param('id') id: string, @Res() res: Response) {
+		const customer = await this.queuecustomersService.findCustomer(+id)
+
+		if (!customer) {
+			throw new NotFoundException('O cliente não existe')
+		}
+
+		await this.queuecustomersService.deleteCustomer(customer.id)
 		return res.status(HttpStatus.NO_CONTENT).send()
 	}
 }
