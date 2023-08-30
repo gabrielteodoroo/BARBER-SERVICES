@@ -16,7 +16,7 @@ export class UsersController {
 
 	@Post()
 	async create(@Body() data: CreateUsersDto, @Res() res: Response) {
-		const userEmail: any = await this.usersService.findUserByEmail(data.email)
+		const userEmail = await this.usersService.findUserByEmail(data.email)
 
 		if (userEmail) {
 			throw new BadRequestException('E-mail já existe')
