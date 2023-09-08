@@ -50,6 +50,7 @@ export class ExpertsController {
 			throw new NotFoundException('Profissional não encontrado')
 		}
 
+
 		return res.json(expert)
 	}
 

@@ -28,6 +28,7 @@ export class AuthController {
 	@Get('profile')
 	async getProfile(@Req() req: Request, @Res() res: Response) {
 		const { user } = req
+
 		return res.json({ ...user, password: '' })
 	}
 }
